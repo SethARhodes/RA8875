@@ -68,6 +68,8 @@ Just uncomment the line below, this option works only for Arduino DUE and has NO
 on other CPU!
 */
 
+#define USE_ADAFRUIT_PHASE_FIXUP
+
 //#define USE_DUE_WIRE1_INTERFACE//force use Wire1 (only for DUE, no effects on other CPU)
 
 /* [Default Interrupt Number for Touchscreen] [RA8875 & FT5206] ++++++++++++++++++++++++++++++++++
