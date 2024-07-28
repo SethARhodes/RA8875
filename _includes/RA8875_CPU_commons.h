@@ -184,6 +184,24 @@ Part of RA8875 library from https://github.com/sumotoy/RA8875
 	  #define pgm_read_byte(addr) (*(const unsigned char *)(addr))
 	  #define pgm_read_word(addr) (*(const unsigned short *)(addr))
 	#endif
+#elif defined (__arm__) && defined(__SAMD51P20A__)
+/* 
+--------------------------------------------------------------
+			ADAFRUIT GRAND CENTRAL M4
+--------------------------------------------------------------
+*/
+    #define ___DUESTUFF
+	#define _FASTCPU
+	#include "Arduino.h"
+	#ifndef __PGMSPACE_H_
+	  #define __PGMSPACE_H_ 1
+	  //#define PROGMEM
+	  #define PGM_P  const char *
+	  #define PSTR(str) (str)
+	  #define pgm_read_byte_near(addr) pgm_read_byte(addr)
+	  #define pgm_read_byte(addr) (*(const unsigned char *)(addr))
+	  #define pgm_read_word(addr) (*(const unsigned short *)(addr))
+	#endif
 #elif !defined(SPARK) && (defined(STM32F2XX) || defined(STM32F10X_MD) || defined(STM32_SERIES_F1) || defined(STM32_SERIES_F2))
 /* 
 --------------------------------------------------------------
