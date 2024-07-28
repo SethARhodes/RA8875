@@ -32,10 +32,10 @@ You are using 4 wire SPI here, so:
  the rest of pin below:
  */
 
-#define RA8875_INT 2 //any pin
-#define RA8875_CS 10 //see below...
+#define RA8875_INT 3 //any pin
+#define RA8875_CS 2 //see below...
 /* DUE: should be any but not sure */
-#define RA8875_RESET 9//any pin or nothing!
+#define RA8875_RESET 14 //any pin or nothing!
 
 RA8875 tft = RA8875(RA8875_CS,RA8875_RESET);//arduino's
 
@@ -56,7 +56,7 @@ void setup() {
   Serial.begin(38400);
   long unsigned debug_start = millis ();
   while (!Serial && ((millis () - debug_start) <= 5000)) ;
-  tft.begin(RA8875_800x480);//initialize RA8875
+  tft.begin(Adafruit_800x480);//initialize RA8875
 /* Adafruit_480x272 Adafruit_800x480 RA8875_480x272 RA8875_800x480 */
   tft.useINT(RA8875_INT);//We use generic int helper for Internal Resistive Touch
   tft.touchBegin();//enable touch support for RA8875
@@ -85,11 +85,11 @@ void setup() {
     proceed = false;
   } else {
     Serial.println("Start calibration, please follow indications...\n");
-    Serial.println("\nPlease press FIRMLY the TOP/LEFT angle of your screen now!\n");
+    Serial.println("\nPlease press FIRMLY the TOP/LEFT corner of your screen now!\n");
     if (tft.width() > 480)  tft.setFontScale(1);
     tft.setCursor(CENTER, CENTER);
     tft.setTextColor(RA8875_WHITE);
-    tft.print("Please press the TOP/LEFT angle now!");
+    tft.print("Please press the TOP/LEFT corner now!");
     tft.fillCircle(5, 5, 5, RA8875_RED);
     proceed = true;
     //this enable an ISR on CPU and RA8875 INT
@@ -134,8 +134,8 @@ void loop() {
           if (tft.width() > 480)  tft.setFontScale(1);
           tft.setCursor(CENTER, CENTER);
           tft.setTextColor(RA8875_WHITE);
-          tft.print("ok, Now Touch Bottom/Right angle!");
-          Serial.println("\n...done, Now Touch Bottom/Right angle!");
+          tft.print("ok, Now Touch Bottom/Right corner!");
+          Serial.println("\n...done, Now Touch Bottom/Right corner!");
           delay(2000);
           tft.touchEnable(true);
           scount++;

@@ -152,17 +152,6 @@ Part of RA8875 library from https://github.com/sumotoy/RA8875
 	  #define pgm_read_word(addr) (*(const unsigned short *)(addr))
 	#endif
 	#define __PRGMTAG_	
-#elif defined (__arm__) && defined(ARDUINO_ARCH_SAMD)
-/* 
---------------------------------------------------------------
-			ARDUINO ZERO
-	Actually NOT supported
---------------------------------------------------------------
-*/
-	#include "Arduino.h"
-	#include <pins_arduino.h>
-	#define ___ZEROSTUFF
-	#error "your board it's not supported yet!"
 #elif defined (__arm__) && defined(__SAM3X8E__)
 /* 
 --------------------------------------------------------------
@@ -176,7 +165,7 @@ Part of RA8875 library from https://github.com/sumotoy/RA8875
 	#include <pins_arduino.h>
 	#ifndef __PGMSPACE_H_
 	  #define __PGMSPACE_H_ 1
-	  #define PROGMEM
+		// #define PROGMEM
 	  //following probably useless! ARM do not need PROGMEM
 	  #define PGM_P  const char *
 	  #define PSTR(str) (str)
@@ -184,18 +173,18 @@ Part of RA8875 library from https://github.com/sumotoy/RA8875
 	  #define pgm_read_byte(addr) (*(const unsigned char *)(addr))
 	  #define pgm_read_word(addr) (*(const unsigned short *)(addr))
 	#endif
-#elif defined (__arm__) && defined(__SAMD51P20A__)
+#elif defined(ARDUINO_GRAND_CENTRAL_M4) || defined(ADAFRUIT_GRAND_CENTRAL_M4)
 /* 
 --------------------------------------------------------------
 			ADAFRUIT GRAND CENTRAL M4
 --------------------------------------------------------------
 */
-    #define ___DUESTUFF
+  #define ___DUESTUFF
 	#define _FASTCPU
 	#include "Arduino.h"
 	#ifndef __PGMSPACE_H_
 	  #define __PGMSPACE_H_ 1
-	  //#define PROGMEM
+    #define PROGMEM
 	  #define PGM_P  const char *
 	  #define PSTR(str) (str)
 	  #define pgm_read_byte_near(addr) pgm_read_byte(addr)
@@ -285,7 +274,7 @@ Part of RA8875 library from https://github.com/sumotoy/RA8875
 --------------------------------------------------------------
 */
 #else
-	#error "your board it's not supported yet!"
+	#error "Your board is not supported yet!"
 #endif
 
 #include "Print.h"
