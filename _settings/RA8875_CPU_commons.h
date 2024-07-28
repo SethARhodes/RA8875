@@ -117,7 +117,7 @@ Part of RA8875 library from https://github.com/sumotoy/RA8875
 	  #define pgm_read_word(addr) (*(const unsigned short *)(addr))
 	#endif
 	#define __PRGMTAG_	
-#elif defined (__arm__) && defined(__SAM3X8E__)
+#elif defined (__arm__) && defined(__SAMD51__)
 /* 
 --------------------------------------------------------------
 			ARDUINO DUE COMPATIBLE
